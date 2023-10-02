@@ -26,5 +26,18 @@
         android:id="@+id/nav_skill"
         android:name="com.example.myapplication.ui.skill.SkillFragment"
         android:label="Skill"
-        tools:layout="@layout/fragment_skill" />
+        tools:layout="@layout/fragment_skill">
+        <action
+            android:id="@+id/action_nav_skill_to_skill_detail"
+            app:destination="@+id/nav_skill_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_skill_detail"
+        android:name="com.example.myapplication.ui.skill.DetailSkillActivity"
+        android:label="@string/menu_skill_detail"
+        tools:layout="@layout/activity_detail_skill"
+        />
+
+
 </navigation>
