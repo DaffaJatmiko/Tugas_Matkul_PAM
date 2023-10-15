@@ -7,7 +7,12 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_search">Search for skill here...</string>
     <string name="action_settings">Settings</string>
+
     <string name="identitas">Daffa Abdurrahman Jatmiko (121140181)</string>
+
+    <string name="action_search">Search for skill here...</string>
+    <string name="identitas_diri">Daffa Abdurrahman Jatmiko (121140181)</string>
+
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>

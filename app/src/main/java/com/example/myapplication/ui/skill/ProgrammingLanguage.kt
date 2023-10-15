@@ -25,4 +25,9 @@ data class ProgrammingLanguage(val image: Int, val name: String) : Parcelable {
             return arrayOfNulls(size)
         }
     }
+
 }
+
+
+
+
