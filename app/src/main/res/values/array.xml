@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="string_skills_array">
-        <item>JavaScript</item>
-        <item>Java</item>
-        <item>Golang</item>
-        <item>Python</item>
-        <item>Kotlin</item>
-        <item>JavaScript</item>
-        <item>Java</item>
-        <item>Golang</item>
-        <item>Python</item>
-        <item>Kotlin</item>
+        <item>@string/js</item>
+        <item>@string/java</item>
+        <item>@string/go</item>
+        <item>@string/Python</item>
+        <item>@string/kotlin</item>
+        <item>@string/js</item>
+        <item>@string/java </item>
+        <item>@string/go</item>
+        <item>@string/Python</item>
+        <item>@string/kotlin</item>
     </string-array>
 
     <integer-array name="integer_skills_image">

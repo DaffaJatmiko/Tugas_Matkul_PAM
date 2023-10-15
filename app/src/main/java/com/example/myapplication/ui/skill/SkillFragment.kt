@@ -15,21 +15,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSkillBinding
+import com.example.myapplication.ui.helper.ConstantUtil
 import java.util.Locale
 
 
 class SkillFragment : Fragment() {
 
 
-    //    private lateinit var list: ArrayList<ProgrammingLanguage>
     private var _binding: FragmentSkillBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: ProgrammingLanguageAdapter
+
     private lateinit var originalList: ArrayList<ProgrammingLanguage>
     private lateinit var currentList: ArrayList<ProgrammingLanguage>
-    private lateinit var adapter: ProgrammingLanguageAdapter
-//    private var filteredList: List<ProgrammingLanguage> = ArrayList()
 
+    companion object {
+        private const val RECYCLER_VIEW_HAS_FIXED_SIZE = true
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,22 +45,8 @@ class SkillFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView = binding.recyclerViewSkill
-
-        recyclerView.setHasFixedSize(true)
-
-        originalList = ArrayList()
-        originalList.add(ProgrammingLanguage(R.drawable.kotlin, "Kotlin"))
-        originalList.add(ProgrammingLanguage(R.drawable.java, "Java"))
-        originalList.add(ProgrammingLanguage(R.drawable.js, "JavaScript"))
-        originalList.add(ProgrammingLanguage(R.drawable.python, "Python"))
-        originalList.add(ProgrammingLanguage(R.drawable.golang, "Golang"))
-        originalList.add(ProgrammingLanguage(R.drawable.kotlin, "Kotlin"))
-        originalList.add(ProgrammingLanguage(R.drawable.java, "Java"))
-        originalList.add(ProgrammingLanguage(R.drawable.js, "JavaScript"))
-        originalList.add(ProgrammingLanguage(R.drawable.python, "Python"))
-        originalList.add(ProgrammingLanguage(R.drawable.golang, "Golang"))
-
+        initializeRecylerView()
+        originalList = ConstantUtil.getSkillData(this)
         currentList = ArrayList(originalList)
         adapter = ProgrammingLanguageAdapter(currentList){ clickedItem ->
             navigateToDetail(clickedItem)
@@ -66,15 +56,17 @@ class SkillFragment : Fragment() {
 
     }
 
-
+    private fun initializeRecylerView(){
+        recyclerView = binding.recyclerViewSkill
+        recyclerView.setHasFixedSize(RECYCLER_VIEW_HAS_FIXED_SIZE)
+        recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main, menu)
 
-        val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        binding.actionSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -90,10 +82,8 @@ class SkillFragment : Fragment() {
     }
 
     private fun filterData(query: String?) {
-        Log.d("SkillFragment", "Query: $query")
         if (query != null) {
             val filteredList = originalList.filter { it.name.lowercase(Locale.ROOT).contains(query) }
-            Log.d("SkillFragment", "FilteredList: $filteredList")
 
             if (filteredList.isEmpty()) {
                 Toast.makeText(requireContext(), "Tidak ada data ditemukan", Toast.LENGTH_SHORT).show()
@@ -109,6 +99,7 @@ class SkillFragment : Fragment() {
         bundle.putString("extra_name", extraName)
         findNavController().navigate(R.id.action_nav_skill_to_skill_detail, bundle)
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
